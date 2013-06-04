@@ -157,4 +157,6 @@
     
     <include filename="mainmenu.xml"/>
     <include filename="options.xml"/>
+    <include filename="vanillaships.xml"/>
+    <include filename="combatscreen.xml"/>
 </themes>

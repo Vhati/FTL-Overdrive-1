@@ -8,7 +8,6 @@ import de.matthiasmann.twl.textarea.HTMLTextAreaModel;
 
 public class MainMenu extends State {
 	private static final int CONTINUE = 0;
-	@SuppressWarnings("unused")
 	private static final int START = 1;
 	private static final int TUTORIAL = 2;
 	@SuppressWarnings("unused")
@@ -39,6 +38,13 @@ public class MainMenu extends State {
 		}*/
 
 		buttons[MainMenu.CONTINUE].setEnabled(false);
+		
+		buttons[START].addCallback(new Runnable() {
+			@Override
+			public void run() {
+				OverDrive.getInstance().setCurrentState(new CombatScreen());
+			}
+		});
 
 		// Since we have some buttons that are NYI, why not use them for some other useful debugging stuff for now? ;-)
 		buttons[MainMenu.TUTORIAL].setText("Test Resizable Frames");

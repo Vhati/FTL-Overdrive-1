@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE themes PUBLIC "-//www.matthiasmann.de//TWL-Theme//EN" "http://hg.l33tlabs.org/twl/raw-file/tip/src/de/matthiasmann/twl/theme/theme.dtd">
+<themes>
+    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/effects/thrusters_on.png">
+        <animation name="ship.kestral.thrusters" timeSource="hover">
+            <frames duration="100" count="4" offsetx="22" xywh="0,0,22,70"/>
+        </animation>
+    </images>
+    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/kestral_base.png">
+        <area name="ship.kestral.base" xywh="*"/>
+    </images>
+    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/kestral_floor.png">
+        <area name="ship.kestral.floor" xywh="*"/>
+    </images>
+    <images>
+        <composed name="ship.kestral">
+            <alias ref="ship.kestral.base"/>
+            <alias ref="ship.kestral.floor"/>
+            <alias ref="ship.kestral.thrusters" inset="318,73,56,582" sizeOverwriteH="22" sizeOverwriteV="70"/>
+            <alias ref="ship.kestral.thrusters" inset="52,73,322,582" sizeOverwriteH="22" sizeOverwriteV="70"/>
+        </composed>
+    </images>
+    
+    
+    <images file="roomBorder.png">
+        <grid name="room.empty" weightsX="0,1,0" weightsY="0,1,0">
+            <area xywh="0,0,15,15"/>
+            <area xywh="15,0,35,15"/>
+            <area xywh="50,0,20,15"/>
+            <area xywh="0,15,15,35"/>
+            <area xywh="15,15,35,35"/>
+            <area xywh="50,15,20,35"/>
+            <area xywh="0,50,15,20"/>
+            <area xywh="15,50,35,20"/>
+            <area xywh="50,50,20,20"/>
+        </grid>
+    </images>
+    
+    
+    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/interior/room_pilot.png">
+        <composed name="room.pilot">
+            <alias ref="room.empty"/>
+            <area xywh="*"/>
+        </composed>
+    </images>
+    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/interior/room_doors.png">
+        <composed name="room.doors">
+            <alias ref="room.empty"/>
+            <area xywh="*"/>
+        </composed>
+    </images>
+    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/interior/room_sensors.png">
+        <composed name="room.sensors">
+            <alias ref="room.empty"/>
+            <area xywh="*"/>
+        </composed>
+    </images>
+    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/interior/room_medbay.png">
+        <composed name="room.medbay">
+            <alias ref="room.empty"/>
+            <area xywh="*"/>
+        </composed>
+    </images>
+    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/interior/room_shields.png">
+        <composed name="room.shields">
+            <alias ref="room.empty"/>
+            <area xywh="*"/>
+        </composed>
+    </images>
+    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/interior/room_weapons.png">
+        <composed name="room.weapons">
+            <alias ref="room.empty"/>
+            <area xywh="*"/>
+        </composed>
+    </images>
+    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/interior/room_oxygen.png">
+        <composed name="room.oxygen">
+            <alias ref="room.empty"/>
+            <area xywh="*"/>
+        </composed>
+    </images>
+    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/interior/room_engines.png">
+        <composed name="room.engines">
+            <alias ref="room.empty"/>
+            <area xywh="*"/>
+        </composed>
+    </images>
+
+
+    
+    
+    <theme name="room-empty" ref="-defaults">
+        <param name="background"><image>room.empty</image></param>
+    </theme>
+    <theme name="room-pilot" ref="-defaults">
+        <param name="background"><image>room.pilot</image></param>
+    </theme>
+    <theme name="room-doors" ref="-defaults">
+        <param name="background"><image>room.doors</image></param>
+    </theme>
+    <theme name="room-sensors" ref="-defaults">
+        <param name="background"><image>room.sensors</image></param>
+    </theme>
+    <theme name="room-medbay" ref="-defaults">
+        <param name="background"><image>room.medbay</image></param>
+    </theme>
+    <theme name="room-shields" ref="-defaults">
+        <param name="background"><image>room.shields</image></param>
+    </theme>
+    <theme name="room-weapons" ref="-defaults">
+        <param name="background"><image>room.weapons</image></param>
+    </theme>
+    <theme name="room-oxygen" ref="-defaults">
+        <param name="background"><image>room.oxygen</image></param>
+    </theme>
+    <theme name="room-engines" ref="-defaults">
+        <param name="background"><image>room.engines</image></param>
+    </theme>
+    
+    
+    <theme name="ship-kestral" ref="-defaults">
+        <param name="background"><image>ship.kestral</image></param>
+        <param name="border"><border>134,89,0,0</border></param>
+    </theme>
+</themes>

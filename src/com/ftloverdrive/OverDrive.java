@@ -13,14 +13,11 @@ import org.lwjgl.opengl.GL11;
 import de.matthiasmann.twl.ActionMap.Action;
 import de.matthiasmann.twl.FPSCounter;
 import de.matthiasmann.twl.GUI;
-import de.matthiasmann.twl.Timer;
 import de.matthiasmann.twl.Widget;
 import de.matthiasmann.twl.renderer.lwjgl.LWJGLRenderer;
 import de.matthiasmann.twl.theme.ThemeManager;
 
 public class OverDrive extends Widget {
-	private static final int TICKS_PER_SECOND = 20;
-
 	public static void main(String[] args) {
 		try {
 			Display.setDisplayMode(new DisplayMode(1280, 720));
@@ -34,16 +31,6 @@ public class OverDrive extends Widget {
 			GUI gui = new GUI(overdrive, overdrive.renderer);
 
 			overdrive.loadTheme();
-			
-	        Timer timer = gui.createTimer();
-	        timer.setContinuous(true);
-	        timer.setCallback(new Runnable() {
-	            public void run() {
-	            	overdrive.tick();
-	            }
-	        });
-	        timer.setDelay(100 / TICKS_PER_SECOND);
-	        timer.start();
 
 			while (!Display.isCloseRequested() && !overdrive.quit) {
 				GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
@@ -80,7 +67,7 @@ public class OverDrive extends Widget {
 
 	private State currentState;
 	private FPSCounter fpsCounter;
-
+	
 	public OverDrive() throws LWJGLException {
 		if (instance != null) throw new RuntimeException("OverDrive already exists!");
 		instance = this;
@@ -98,24 +85,22 @@ public class OverDrive extends Widget {
 
 	public void setCurrentState(State newState) {
 		if (currentState != null) {
+			currentState.onLeaveState();
 			removeChild(currentState);
 		}
 		currentState = newState;
-		add(currentState);
-	}
-	
-	protected void tick() {
-		currentState.tick();
+		insertChild(currentState, 0);
+		currentState.onEnterState();
 	}
 
 	@Override
 	protected void layout() {
-		currentState.setSize(getInnerWidth(), getInnerHeight());
+		currentState.setSize(getWidth(), getHeight());
 		currentState.setPosition(0, 0);
 
 		fpsCounter.adjustSize();
 		// Top-right corner
-		fpsCounter.setPosition(getInnerWidth() - fpsCounter.getWidth(), getInnerY());
+		fpsCounter.setPosition(getInnerRight() - fpsCounter.getWidth(), getInnerY());
 	}
 
 	@Action
