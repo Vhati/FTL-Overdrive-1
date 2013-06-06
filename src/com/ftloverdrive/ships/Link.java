@@ -25,7 +25,7 @@ public abstract class Link {
 	}
 	
 	public void destroy() {
-		onLinkDestroyed();
+		fireLinkDestroyed();
 	}
 	
 	// Listeners
@@ -39,7 +39,7 @@ public abstract class Link {
 		listeners.remove(l);
 	}
 	
-	private void onLinkDestroyed() {
+	private void fireLinkDestroyed() {
 		for (ILinkListener l : listeners) {
 			l.onLinkDestroyed(this);
 		}

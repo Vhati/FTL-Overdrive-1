@@ -46,7 +46,7 @@ public abstract class Room {
 	public Room setPosition(double x, double y) {
 		this.x = x;
 		this.y = y;
-		onRoomMoved();
+		fireRoomMoved();
 		return this;
 	}
 	
@@ -64,7 +64,7 @@ public abstract class Room {
 	 */
 	public Room setScale(double scale) {
 		this.scale = scale;
-		onRoomMoved();
+		fireRoomMoved();
 		return this;
 	}
 	
@@ -83,7 +83,7 @@ public abstract class Room {
 	 */
 	public Room setTheme(String theme) {
 		this.theme = theme;
-		onRoomThemeChanged(theme);
+		fireRoomThemeChanged(theme);
 		return this;
 	}
 
@@ -161,7 +161,7 @@ public abstract class Room {
 		if (ship.getRooms().contains(this)) {
 			ship.removeRoom(this);
 		}
-		onRoomDestroyed();
+		fireRoomDestroyed();
 	}
 	
 	// Listeners
@@ -175,19 +175,19 @@ public abstract class Room {
 		listeners.remove(l);
 	}
 	
-	private void onRoomMoved() {
+	private void fireRoomMoved() {
 		for (IRoomListener l : listeners) {
 			l.onRoomMoved(this);
 		}
 	}
 	
-	private void onRoomThemeChanged(String newTheme) {
+	private void fireRoomThemeChanged(String newTheme) {
 		for (IRoomListener l : listeners) {
 			l.onRoomThemeChanged(this, newTheme);
 		}
 	}
 	
-	private void onRoomDestroyed() {
+	private void fireRoomDestroyed() {
 		for (IRoomListener l : listeners) {
 			l.onRoomDestroyed(this);
 		}

@@ -24,7 +24,7 @@ public class Tile {
 		 */
 		void addLink(Link link) {
 			links.add(link);
-			onTileLinkAdded(this, link);
+			fireTileLinkAdded(this, link);
 		}
 		
 		@Override
@@ -32,7 +32,7 @@ public class Tile {
 			if (links.contains(link)) {
 				links.remove(link);
 			}
-			onTileLinkRemoved(this, link);
+			fireTileLinkRemoved(this, link);
 		}
 		
 		/**
@@ -85,7 +85,7 @@ public class Tile {
 		for (TileSide side : sides) {
 			side.destroy();
 		}
-		onTileDestroyed();
+		fireTileDestroyed();
 	}
 	
 	// Listeners
@@ -99,19 +99,19 @@ public class Tile {
 		listeners.remove(l);
 	}
 	
-	private void onTileDestroyed() {
+	private void fireTileDestroyed() {
 		for (ITileListener l : listeners) {
 			l.onTileDestroyed(this);
 		}
 	}
 	
-	private void onTileLinkAdded(TileSide side, Link link) {
+	private void fireTileLinkAdded(TileSide side, Link link) {
 		for (ITileListener l : listeners) {
 			l.onTileLinkAdded(this, side, link);
 		}
 	}
 	
-	private void onTileLinkRemoved(TileSide side, Link link) {
+	private void fireTileLinkRemoved(TileSide side, Link link) {
 		for (ITileListener l : listeners) {
 			l.onTileLinkRemoved(this, side, link);
 		}

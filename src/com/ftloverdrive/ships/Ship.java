@@ -17,7 +17,7 @@ public class Ship {
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
-		onShipRename(oldName, newName);
+		fireShipRename(oldName, newName);
 	}
 	public String getName() {
 		return name;
@@ -29,13 +29,13 @@ public class Ship {
 	}
 	public void addRoom(Room room) {
 		rooms.add(room);
-		onRoomAdded(room);
+		fireRoomAdded(room);
 	}
 	public void removeRoom(Room room) {
 		if (!rooms.contains(room)) return;
 		rooms.remove(room);
 		room.destroy();
-		onRoomRemoved(room);
+		fireRoomRemoved(room);
 	}
 
 	
@@ -52,17 +52,17 @@ public class Ship {
 		listeners.remove(l);
 	}
 	
-	private void onShipRename(String oldName, String newName) {
+	private void fireShipRename(String oldName, String newName) {
 		for (IShipListener l : listeners) {
 			l.onShipRename(this, oldName, newName);
 		}
 	}
-	private void onRoomRemoved(Room room) {
+	private void fireRoomRemoved(Room room) {
 		for (IShipListener l : listeners) {
 			l.onRoomRemoved(this, room);
 		}
 	}
-	private void onRoomAdded(Room room) {
+	private void fireRoomAdded(Room room) {
 		for (IShipListener l : listeners) {
 			l.onRoomAdded(this, room);
 		}

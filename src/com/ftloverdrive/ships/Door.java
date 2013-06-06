@@ -19,7 +19,7 @@ public class Door extends Link implements IClickableLink {
 
 	public void setOpen(boolean isOpen) {
 		this.isOpen = isOpen;
-		onDoorOpenedOrClosed(isOpen);
+		fireDoorOpenedOrClosed(isOpen);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class Door extends Link implements IClickableLink {
 		listeners.remove(l);
 	}
 	
-	private void onDoorOpenedOrClosed(boolean isOpen) {
+	private void fireDoorOpenedOrClosed(boolean isOpen) {
 		for (IDoorListener l : listeners) {
 			l.onDoorOpenedOrClosed(this, isOpen);
 		}
