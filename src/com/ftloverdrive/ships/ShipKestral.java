@@ -49,6 +49,9 @@ public class ShipKestral extends Ship {
 		new Door(rooms.get(14).tileAt(1, 1).bottom, rooms.get(15).tileAt(1, 0).top);
 		new Door(rooms.get(16).tileAt(0, 0).right,  rooms.get(14).tileAt(0, 0).left);
 		new Door(rooms.get(16).tileAt(0, 1).right,  rooms.get(14).tileAt(0, 1).left);
+		
+		// not in vanilla kestral
+		new Door(rooms.get(12).tileAt(1, 0).right,  rooms.get(8).tileAt(0, 1).left);
 		//@formatter:on
 	}
 

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ftloverdrive.ships.Direction;
-import com.ftloverdrive.ships.IClickableLink;
 import com.ftloverdrive.ships.Link;
 import com.ftloverdrive.ships.Link.ILinkListener;
 import com.ftloverdrive.ships.Tile;
@@ -90,13 +89,16 @@ public abstract class LinkRenderer<T extends Link> extends Widget implements ILi
 	
     @Override
     protected boolean handleEvent(Event evt) {
-        if (link instanceof IClickableLink) {
-        	if (evt.getType() == MOUSE_BTNDOWN) {
-            	((IClickableLink) link).onClick(evt.getMouseButton());
-            }
-        	return evt.isMouseEvent() && evt.getType() != MOUSE_WHEEL;
+        if(evt.getType() == Event.Type.MOUSE_ENTERED) {
+            link.onMouseEntered(tileSide);
         }
-		return false;
+        if(evt.getType() == Event.Type.MOUSE_EXITED) {
+            link.onMouseExited(tileSide);
+        }
+    	if (evt.getType() == MOUSE_BTNDOWN) {
+        	link.onMouseClick(tileSide, evt.getMouseButton());
+        }
+    	return evt.isMouseEvent() && evt.getType() != MOUSE_WHEEL;
     }
 
 	@Override
@@ -108,6 +110,13 @@ public abstract class LinkRenderer<T extends Link> extends Widget implements ILi
 	public void onLinkDestroyed(Link link) {
 		if (link == this.link && getParent() != null) {
 			getParent().removeChild(this);
+		}
+	}
+	
+	@Override
+	public void onSetHover(Link link, boolean hover) {
+		if (link == this.link) {
+			getAnimationState().setAnimationState(StateKey.get("hover"), hover);
 		}
 	}
 }

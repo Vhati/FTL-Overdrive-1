@@ -48,6 +48,10 @@ public class Tile {
 				link.destroy();
 			}
 		}
+
+		@Override
+		public void onSetHover(Link link, boolean hover) {
+		}
 	}
 	
 	public final TileSide left = new TileSide(LEFT);

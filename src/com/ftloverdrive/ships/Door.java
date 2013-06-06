@@ -6,7 +6,7 @@ import java.util.List;
 import com.ftloverdrive.ships.Tile.TileSide;
 
 //TODO create and implement interfaces that allow links to transfer crew, fluids, etc.
-public class Door extends Link implements IClickableLink {
+public class Door extends Link {
 	private boolean isOpen = false;
 	
 	public Door(TileSide... tileSides) {
@@ -23,10 +23,9 @@ public class Door extends Link implements IClickableLink {
 	}
 
 	@Override
-	public void onClick(int button) {
+	public void onMouseClick(TileSide tileSide, int button) {
 		setOpen(!isOpen());
 	}
-	
 
 	// Listeners
 	private List<IDoorListener> listeners = new ArrayList<IDoorListener>();

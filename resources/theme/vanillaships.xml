@@ -103,61 +103,70 @@
     <images file="door_background.png">
         <select name="door.background">
             <area xywh="*" rot="0" if="left"/>
-            <area xywh="*" rot="90" if="top" sizeOverwriteH="31" sizeOverwriteV="8"/>
-            <area xywh="*" rot="180" if="right" sizeOverwriteH="31" sizeOverwriteV="8"/>
+            <area xywh="*" rot="90" if="top"/>
+            <area xywh="*" rot="180" if="right"/>
             <area xywh="*" rot="270" if="bottom"/>
+        </select>
+    </images>
+    <images file="../resource.dat/img/effects/door_highlight.png">
+        <select name="door.highlight" tint="#66FFFFFF">
+            <area xywh="17,0,18,35" inset="-2,0,-2,-10" rot="0" if="left"/>
+            <area xywh="17,0,18,35" inset="0,-2,-10,-2" rot="90" if="top"/>
+            <area xywh="17,0,18,35" inset="-2,-10,-2,0" rot="180" if="right"/>
+            <area xywh="17,0,18,35" inset="-10,-2,0,-2" rot="270" if="bottom"/>
         </select>
     </images>
     <images file="../resource.dat/img/effects/door_sheet.png">
         <composed name="door">
             <alias ref="door.background"/>
+            <alias ref="door.highlight" if="hover"/>
             <select>
-                <animation timeSource="open" if="left + open">
-                    <frames duration="100" count="5" offsetx="35" xywh="17,2,8,31" rot="0"/>
+                <animation timeSource="open" inset="-2,0,-2,-10" if="left + open">
+                    <frames duration="50" count="5" offsetx="35" xywh="17,0,18,35" rot="0"/>
                     <repeat>
-                        <frames duration="100" count="1" xywh="157,2,8,31" rot="0"/>
+                        <frames duration="50" count="1" xywh="157,0,18,35" rot="0"/>
                     </repeat>
                 </animation>
-                <animation timeSource="open" if="left + !open">
-                    <frames duration="100" count="5" offsetx="-35" xywh="157,2,8,31" rot="0"/>
+                <animation timeSource="open" inset="-2,0,-2,-10" if="left + !open">
+                    <frames duration="50" count="5" offsetx="-35" xywh="157,0,18,35" rot="0"/>
                     <repeat>
-                        <frames duration="100" count="1" xywh="17,2,8,31" rot="0"/>
+                        <frames duration="50" count="1" xywh="17,0,18,35" rot="0"/>
                     </repeat>
                 </animation>
-                <animation timeSource="open" if="top + open">
-                    <frames duration="100" count="5" offsetx="35" xywh="17,2,8,31" rot="90"/>
+                <animation timeSource="open" inset="0,-2,-10,-2" if="top + open">
+                    <frames duration="50" count="5" offsetx="35" xywh="17,0,18,35" rot="90"/>
                     <repeat>
-                        <frames duration="100" count="1" xywh="157,2,8,31" rot="90"/>
+                        <frames duration="50" count="1" xywh="157,0,18,35" rot="90"/>
                     </repeat>
                 </animation>
-                <animation timeSource="open" if="top + !open">
-                    <frames duration="100" count="5" offsetx="-35" xywh="157,2,8,31" rot="90"/>
+                <animation timeSource="open" inset="0,-2,-10,-2" if="top + !open">
+                    <frames duration="50" count="5" offsetx="-35" xywh="157,0,18,35" rot="90"/>
                     <repeat>
-                        <frames duration="100" count="1" xywh="17,2,8,31" rot="90"/>
+                        <frames duration="50" count="1" xywh="17,0,18,35" rot="90"/>
                     </repeat>
                 </animation>
-                <animation timeSource="open" if="right + open">
-                    <frames duration="100" count="5" offsetx="35" xywh="17,2,8,31" rot="180"/>
+                <animation timeSource="open" inset="-2,-10,-2,0" if="right + open">
+                    <frames duration="50" count="5" offsetx="35" xywh="17,0,18,35" rot="180"/>
                     <repeat>
-                        <frames duration="100" count="1" xywh="157,2,8,31" rot="180"/>
+                        <frames duration="50" count="1" xywh="157,0,18,35" rot="180"/>
                     </repeat>
                 </animation>
-                <animation timeSource="open" if="right + !open">
-                    <frames duration="100" count="5" offsetx="-35" xywh="157,2,8,31" rot="180"/>
+                <animation timeSource="open" inset="-2,-10,-2,0" if="right + !open">
+                    <frames duration="50" count="5" offsetx="-35" xywh="157,0,18,35" rot="180"/>
                     <repeat>
-                        <frames duration="100" count="1" xywh="17,2,8,31" rot="180"/>
+                        <frames duration="50" count="1" xywh="17,0,18,35" rot="180"/>
                     </repeat>
                 </animation>
-                <animation timeSource="open" if="bottom + open">
-                    <frames duration="100" count="5" offsetx="35" xywh="17,2,8,31" rot="270"/>
+                <animation timeSource="open" inset="-10,-2,0,-2" if="bottom + open">
+                    <frames duration="50" count="5" offsetx="35" xywh="17,0,18,35" rot="270"/>
                     <repeat>
-                        <frames duration="100" count="1" xywh="157,2,8,31" rot="270"/>
+                        <frames duration="50" count="1" xywh="157,0,18,35" rot="270"/>
                     </repeat>
                 </animation>
-                <animation timeSource="open" if="bottom + !open">
-                    <frames duration="100" count="5" offsetx="-35" xywh="157,2,8,31" rot="270"/>
+                <animation timeSource="open" inset="-10,-2,0,-2" if="bottom + !open">
+                    <frames duration="50" count="5" offsetx="-35" xywh="157,0,18,35" rot="270"/>
                     <repeat>
-                        <frames duration="100" count="1" xywh="17,2,8,31" rot="270"/>
+                        <frames duration="50" count="1" xywh="17,0,18,35" rot="270"/>
                     </repeat>
                 </animation>
             </select>
