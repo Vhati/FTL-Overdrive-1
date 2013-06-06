@@ -1,18 +1,28 @@
 package com.ftloverdrive.ships.gui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ftloverdrive.ships.Room;
 import com.ftloverdrive.ships.Room.IRoomListener;
+import com.ftloverdrive.ships.Tile;
 
 import de.matthiasmann.twl.Widget;
 
 public class RoomRenderer extends Widget implements IRoomListener {
 	public final Room room;
+	private final List<TileRenderer> tileRenderers = new ArrayList<TileRenderer>();
 	
 	public RoomRenderer(Room room) {
 		this.room = room;
 		room.addListener(this);
 		onRoomMoved(room);
 		onRoomThemeChanged(room, room.getTheme());
+		for (Tile tile : room.getTiles()) {
+			TileRenderer tr = new TileRenderer(tile);
+			tileRenderers.add(tr);
+			add(tr);
+		}
 	}
 
 	@Override
@@ -24,11 +34,20 @@ public class RoomRenderer extends Widget implements IRoomListener {
 	
 	@Override
 	protected void layout() {
-		setPosition(
-				getParent().getInnerX() + (int)((room.getX() - room.getScale() / 2) * 35),
-				getParent().getInnerY() + (int)((room.getY() - room.getScale() / 2) * 35));
-		setSize((int)(room.getWidth() * room.getScale() * 35),
-				(int)(room.getHeight() * room.getScale() * 35));
+		for (TileRenderer tr : tileRenderers) {
+			Tile tile = tr.tile;
+			tr.setPosition(
+					getX() + (int)(35 * room.getScale() * tile.x),
+					getY() + (int)(35 * room.getScale() * tile.y));
+			tr.setSize(
+					(int)(35 * room.getScale()),
+					(int)(35 * room.getScale()));
+		}
+	}
+
+	@Override
+	public void destroy() {
+		super.destroy();
 	}
 
 	@Override
@@ -39,8 +58,6 @@ public class RoomRenderer extends Widget implements IRoomListener {
 	}
 
 	@Override
-	public void destroy() {
-		super.destroy();
-		room.removeListener(this);
+	public void onRoomDestroyed(Room room) {
 	}
 }

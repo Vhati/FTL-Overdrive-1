@@ -28,4 +28,9 @@ public class CombatScreen extends State {
 	public void back() {
 		OverDrive.getInstance().setCurrentState(new MainMenu());
 	}
+	
+	@Action
+	public void toggleRooms() {
+		playerShipRenderer.setShowRooms(!playerShipRenderer.getShowRooms());
+	}
 }

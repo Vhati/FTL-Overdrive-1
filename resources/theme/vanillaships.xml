@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE themes PUBLIC "-//www.matthiasmann.de//TWL-Theme//EN" "http://hg.l33tlabs.org/twl/raw-file/tip/src/de/matthiasmann/twl/theme/theme.dtd">
 <themes>
-    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/effects/thrusters_on.png">
+    <images file="../resource.dat/img/effects/thrusters_on.png">
         <animation name="ship.kestral.thrusters" timeSource="hover">
             <frames duration="100" count="4" offsetx="22" xywh="0,0,22,70"/>
         </animation>
     </images>
-    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/kestral_base.png">
+    <images file="../resource.dat/img/ship/kestral_base.png">
         <area name="ship.kestral.base" xywh="*"/>
     </images>
-    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/kestral_floor.png">
+    <images file="../resource.dat/img/ship/kestral_floor.png">
         <area name="ship.kestral.floor" xywh="*"/>
     </images>
     <images>
         <composed name="ship.kestral">
             <alias ref="ship.kestral.base"/>
-            <alias ref="ship.kestral.floor"/>
+            <alias ref="ship.kestral.floor" if="showRooms"/>
             <alias ref="ship.kestral.thrusters" inset="318,73,56,582" sizeOverwriteH="22" sizeOverwriteV="70"/>
             <alias ref="ship.kestral.thrusters" inset="52,73,322,582" sizeOverwriteH="22" sizeOverwriteV="70"/>
         </composed>
@@ -35,54 +35,132 @@
             <area xywh="50,50,20,20"/>
         </grid>
     </images>
+
     
     
-    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/interior/room_pilot.png">
+    <images file="../resource.dat/img/ship/interior/room_pilot.png">
         <composed name="room.pilot">
-            <alias ref="room.empty"/>
             <area xywh="*"/>
+            <alias ref="room.empty"/>
         </composed>
     </images>
-    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/interior/room_doors.png">
+    <images file="../resource.dat/img/ship/interior/room_doors.png">
         <composed name="room.doors">
-            <alias ref="room.empty"/>
             <area xywh="*"/>
+            <alias ref="room.empty"/>
         </composed>
     </images>
-    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/interior/room_sensors.png">
+    <images file="../resource.dat/img/ship/interior/room_sensors.png">
         <composed name="room.sensors">
-            <alias ref="room.empty"/>
             <area xywh="*"/>
+            <alias ref="room.empty"/>
         </composed>
     </images>
-    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/interior/room_medbay.png">
+    <images file="../resource.dat/img/ship/interior/room_medbay.png">
         <composed name="room.medbay">
-            <alias ref="room.empty"/>
             <area xywh="*"/>
+            <alias ref="room.empty"/>
         </composed>
     </images>
-    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/interior/room_shields.png">
+    <images file="../resource.dat/img/ship/interior/room_shields.png">
         <composed name="room.shields">
-            <alias ref="room.empty"/>
             <area xywh="*"/>
+            <alias ref="room.empty"/>
         </composed>
     </images>
-    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/interior/room_weapons.png">
+    <images file="../resource.dat/img/ship/interior/room_weapons.png">
         <composed name="room.weapons">
-            <alias ref="room.empty"/>
             <area xywh="*"/>
+            <alias ref="room.empty"/>
         </composed>
     </images>
-    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/interior/room_oxygen.png">
+    <images file="../resource.dat/img/ship/interior/room_oxygen.png">
         <composed name="room.oxygen">
-            <alias ref="room.empty"/>
             <area xywh="*"/>
+            <alias ref="room.empty"/>
         </composed>
     </images>
-    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/ship/interior/room_engines.png">
+    
+    
+    <images file="../resource.dat/img/ship/interior/room_engines.png">
         <composed name="room.engines">
-            <alias ref="room.empty"/>
             <area xywh="*"/>
+            <alias ref="room.empty"/>
+        </composed>
+    </images>
+    <images file="../resource.dat/img/effects/fire_L1_strip8.png">
+        <animation name="tile.fire" timeSource="hover">
+            <frames duration="100" count="8" offsetx="32" xywh="0,0,32,32"/>
+        </animation>
+    </images>
+    <images>
+        <composed name="tile">
+            <alias ref="tile.fire" inset="0,1,3,2" if="fire"/>
+        </composed>
+    </images>
+    
+    
+    <images file="door_background.png">
+        <select name="door.background">
+            <area xywh="*" rot="0" if="left"/>
+            <area xywh="*" rot="90" if="top" sizeOverwriteH="31" sizeOverwriteV="8"/>
+            <area xywh="*" rot="180" if="right" sizeOverwriteH="31" sizeOverwriteV="8"/>
+            <area xywh="*" rot="270" if="bottom"/>
+        </select>
+    </images>
+    <images file="../resource.dat/img/effects/door_sheet.png">
+        <composed name="door">
+            <alias ref="door.background"/>
+            <select>
+                <animation timeSource="open" if="left + open">
+                    <frames duration="100" count="5" offsetx="35" xywh="17,2,8,31" rot="0"/>
+                    <repeat>
+                        <frames duration="100" count="1" xywh="157,2,8,31" rot="0"/>
+                    </repeat>
+                </animation>
+                <animation timeSource="open" if="left + !open">
+                    <frames duration="100" count="5" offsetx="-35" xywh="157,2,8,31" rot="0"/>
+                    <repeat>
+                        <frames duration="100" count="1" xywh="17,2,8,31" rot="0"/>
+                    </repeat>
+                </animation>
+                <animation timeSource="open" if="top + open">
+                    <frames duration="100" count="5" offsetx="35" xywh="17,2,8,31" rot="90"/>
+                    <repeat>
+                        <frames duration="100" count="1" xywh="157,2,8,31" rot="90"/>
+                    </repeat>
+                </animation>
+                <animation timeSource="open" if="top + !open">
+                    <frames duration="100" count="5" offsetx="-35" xywh="157,2,8,31" rot="90"/>
+                    <repeat>
+                        <frames duration="100" count="1" xywh="17,2,8,31" rot="90"/>
+                    </repeat>
+                </animation>
+                <animation timeSource="open" if="right + open">
+                    <frames duration="100" count="5" offsetx="35" xywh="17,2,8,31" rot="180"/>
+                    <repeat>
+                        <frames duration="100" count="1" xywh="157,2,8,31" rot="180"/>
+                    </repeat>
+                </animation>
+                <animation timeSource="open" if="right + !open">
+                    <frames duration="100" count="5" offsetx="-35" xywh="157,2,8,31" rot="180"/>
+                    <repeat>
+                        <frames duration="100" count="1" xywh="17,2,8,31" rot="180"/>
+                    </repeat>
+                </animation>
+                <animation timeSource="open" if="bottom + open">
+                    <frames duration="100" count="5" offsetx="35" xywh="17,2,8,31" rot="270"/>
+                    <repeat>
+                        <frames duration="100" count="1" xywh="157,2,8,31" rot="270"/>
+                    </repeat>
+                </animation>
+                <animation timeSource="open" if="bottom + !open">
+                    <frames duration="100" count="5" offsetx="-35" xywh="157,2,8,31" rot="270"/>
+                    <repeat>
+                        <frames duration="100" count="1" xywh="17,2,8,31" rot="270"/>
+                    </repeat>
+                </animation>
+            </select>
         </composed>
     </images>
 
@@ -92,34 +170,42 @@
     <theme name="room-empty" ref="-defaults">
         <param name="background"><image>room.empty</image></param>
     </theme>
-    <theme name="room-pilot" ref="-defaults">
+    <theme name="room-pilot" ref="room-empty">
         <param name="background"><image>room.pilot</image></param>
     </theme>
-    <theme name="room-doors" ref="-defaults">
+    <theme name="room-doors" ref="room-empty">
         <param name="background"><image>room.doors</image></param>
     </theme>
-    <theme name="room-sensors" ref="-defaults">
+    <theme name="room-sensors" ref="room-empty">
         <param name="background"><image>room.sensors</image></param>
     </theme>
-    <theme name="room-medbay" ref="-defaults">
+    <theme name="room-medbay" ref="room-empty">
         <param name="background"><image>room.medbay</image></param>
     </theme>
-    <theme name="room-shields" ref="-defaults">
+    <theme name="room-shields" ref="room-empty">
         <param name="background"><image>room.shields</image></param>
     </theme>
-    <theme name="room-weapons" ref="-defaults">
+    <theme name="room-weapons" ref="room-empty">
         <param name="background"><image>room.weapons</image></param>
     </theme>
-    <theme name="room-oxygen" ref="-defaults">
+    <theme name="room-oxygen" ref="room-empty">
         <param name="background"><image>room.oxygen</image></param>
     </theme>
-    <theme name="room-engines" ref="-defaults">
+    <theme name="room-engines" ref="room-empty">
         <param name="background"><image>room.engines</image></param>
+    </theme>
+    
+    
+    <theme name="tile" ref="-defaults">
+        <param name="background"><image>tile</image></param>
     </theme>
     
     
     <theme name="ship-kestral" ref="-defaults">
         <param name="background"><image>ship.kestral</image></param>
-        <param name="border"><border>134,89,0,0</border></param>
+        <param name="border"><border>116,71,0,0</border></param>
+    </theme>
+    <theme name="door" ref="-defaults">
+        <param name="background"><image>door</image></param>
     </theme>
 </themes>

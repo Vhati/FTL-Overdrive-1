@@ -8,10 +8,12 @@ import com.ftloverdrive.ships.Ship;
 import com.ftloverdrive.ships.Ship.IShipListener;
 
 import de.matthiasmann.twl.Widget;
+import de.matthiasmann.twl.renderer.AnimationState.StateKey;
 
 public class ShipRenderer extends Widget implements IShipListener {
 	private final Ship ship;
 	private final Map<Room, RoomRenderer> roomRenderers = new HashMap<Room, RoomRenderer>();
+	private boolean showRooms;
 	
 	public ShipRenderer(Ship ship) {
 		this.ship = ship;
@@ -20,6 +22,32 @@ public class ShipRenderer extends Widget implements IShipListener {
 			onRoomAdded(ship, room);
 		}
 		onShipRename(ship, "", ship.getName());
+		setShowRooms(true);
+	}
+
+	public void setShowRooms(boolean showRooms) {
+		this.showRooms = showRooms;
+		for (RoomRenderer roomRenderer : roomRenderers.values()) {
+			roomRenderer.setVisible(showRooms);
+		}
+		getAnimationState().setAnimationState(StateKey.get("showRooms"), showRooms);
+	}
+	
+	public boolean getShowRooms() {
+		return showRooms;
+	}
+	
+	@Override
+	protected void layout() {
+		for (RoomRenderer rr : roomRenderers.values()) {
+			Room room = rr.room;
+			rr.setPosition(
+					getInnerX() + (int)(room.getX() * 35),
+					getInnerY() + (int)(room.getY() * 35));
+			rr.setSize(
+					(int)(room.getWidth() * room.getScale() * 35),
+					(int)(room.getHeight() * room.getScale() * 35));
+		}
 	}
 	
 	@Override
@@ -40,14 +68,14 @@ public class ShipRenderer extends Widget implements IShipListener {
 	@Override
 	public void onRoomAdded(Ship ship, Room room) {
 		if (ship == this.ship && !roomRenderers.containsKey(room)) {
-			roomRenderers.put(room, new RoomRenderer(room));
-			add(roomRenderers.get(room));
+			RoomRenderer rr = new RoomRenderer(room);
+			roomRenderers.put(room, rr);
+			add(rr);
 		}
 	}
 	
 	@Override
 	public void destroy() {
 		super.destroy();
-		ship.removeListener(this);
 	}
 }

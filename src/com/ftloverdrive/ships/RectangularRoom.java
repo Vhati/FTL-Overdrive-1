@@ -10,7 +10,8 @@ public class RectangularRoom extends Room {
 	public final int maxY;
 	private final Tile[] tiles;
 	
-	public RectangularRoom(int minX, int minY, int maxX, int maxY) {
+	public RectangularRoom(Ship ship, int minX, int minY, int maxX, int maxY) {
+		super(ship);
 		this.minX = minX;
 		this.minY = minY;
 		this.maxX = maxX;
@@ -22,8 +23,8 @@ public class RectangularRoom extends Room {
 			}
 		}
 	}
-	public RectangularRoom(int width, int height) {
-		this(0, 0, width - 1, height - 1);
+	public RectangularRoom(Ship ship, int width, int height) {
+		this(ship, 0, 0, width - 1, height - 1);
 	}
 
 	@Override
@@ -33,7 +34,8 @@ public class RectangularRoom extends Room {
 
 	@Override
 	public Tile tileAt(int x, int y) {
-		return tiles[x + y * getWidth()];
+		if (x < minX || y < minY || x > maxX || y > maxY) return null;
+		return tiles[(x - minX) + (y - minY) * getWidth()];
 	}
 
 	@Override

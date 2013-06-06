@@ -1,13 +1,12 @@
 package com.ftloverdrive.ships;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 public class Ship {
 	private String name;
-	private Collection<Room> rooms;
+	private List<Room> rooms;
 	
 	public Ship(String name) {
 		this.name = name;
@@ -25,15 +24,17 @@ public class Ship {
 	}
 	
 	
-	public Collection<Room> getRooms() {
-		return Collections.unmodifiableCollection(rooms);
+	public List<Room> getRooms() {
+		return Collections.unmodifiableList(rooms);
 	}
 	public void addRoom(Room room) {
 		rooms.add(room);
 		onRoomAdded(room);
 	}
 	public void removeRoom(Room room) {
+		if (!rooms.contains(room)) return;
 		rooms.remove(room);
+		room.destroy();
 		onRoomRemoved(room);
 	}
 
@@ -41,7 +42,7 @@ public class Ship {
 	
 	
 	// Listeners
-	private List<IShipListener> listeners = new ArrayList<Ship.IShipListener>();
+	private List<IShipListener> listeners = new ArrayList<IShipListener>();
 	
 	public void addListener(IShipListener l) {
 		listeners.add(l);

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE themes PUBLIC "-//www.matthiasmann.de//TWL-Theme//EN" "http://hg.l33tlabs.org/twl/raw-file/tip/src/de/matthiasmann/twl/theme/theme.dtd">
 <themes>
-    <images file="/D:/eclipse/workspace/FTL_Overdrive/resources/resource.dat/img/stars/bg_dullstars.png">
+    <images file="../resource.dat/img/stars/bg_dullstars.png">
         <area name="combatscreen.bg.dullstars" xywh="*"/>
     </images>
     <theme name="combatscreen" ref="-defaults">
         <param name="background"><image>combatscreen.bg.dullstars</image></param>
         <param name="inputMap"><inputMapDef>
             <action name="back">Escape</action>
+            <action name="toggleRooms">R</action>
         </inputMapDef></param>
     </theme>
 </themes>

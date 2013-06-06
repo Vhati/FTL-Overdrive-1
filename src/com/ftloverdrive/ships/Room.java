@@ -5,17 +5,23 @@ import java.util.Collection;
 import java.util.List;
 
 public abstract class Room {
-	/**
-	 * Finds all tiles in this room. Room must contain at least 1 tile, and can't be infinite.
-	 * @return collection containing all tiles
-	 */
-	public abstract Collection<Tile> getTiles();
+	public final Ship ship;
 	
 	private String theme = "empty";
 
 	private double x = 0;
 	private double y = 0;
 	private double scale = 1;
+	
+	public Room(Ship ship) {
+		this.ship = ship;
+	}
+
+	/**
+	 * Finds all tiles in this room. Room must contain at least 1 tile, and can't be infinite.
+	 * @return Collection containing all tiles
+	 */
+	public abstract Collection<Tile> getTiles();
 
 	/**
 	 * @return X coordinate of room's origin in ship's coordinate system
@@ -147,9 +153,19 @@ public abstract class Room {
 	public int getHeight() {
 		return getMaxY() - getMinY() + 1;
 	}
+
+	public void destroy() {
+		for (Tile tile : getTiles()) {
+			tile.destroy();
+		}
+		if (ship.getRooms().contains(this)) {
+			ship.removeRoom(this);
+		}
+		onRoomDestroyed();
+	}
 	
 	// Listeners
-	private List<IRoomListener> listeners = new ArrayList<Room.IRoomListener>();
+	private List<IRoomListener> listeners = new ArrayList<IRoomListener>();
 	
 	public void addListener(IRoomListener l) {
 		listeners.add(l);
@@ -171,8 +187,15 @@ public abstract class Room {
 		}
 	}
 	
+	private void onRoomDestroyed() {
+		for (IRoomListener l : listeners) {
+			l.onRoomDestroyed(this);
+		}
+	}
+	
 	public static interface IRoomListener {
 		public void onRoomMoved(Room room);
 		public void onRoomThemeChanged(Room room, String newTheme);
+		public void onRoomDestroyed(Room room);
 	}
 }
