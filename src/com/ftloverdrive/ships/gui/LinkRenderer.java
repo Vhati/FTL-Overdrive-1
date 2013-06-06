@@ -23,6 +23,7 @@ public abstract class LinkRenderer<T extends Link> extends Widget implements ILi
 	 * Registers a renderer class. Instances of rendererClass will be used to render links that are instances of linkClass.
 	 * rendererClass must have a constructor that accepts a TileSide and a linkClass. It can't have other parameters.
 	 * Example:
+	 * <pre>
 	 * <code>
 	 * public class DoorRenderer extends LinkRenderer<Door> {
 	 *     public DoorRenderer(TileSide side, Door door) {
@@ -33,7 +34,8 @@ public abstract class LinkRenderer<T extends Link> extends Widget implements ILi
 	 * //...
 	 * //...
 	 * LinkRenderer.registerRenderer(Door.class, DoorRenderer.class);
-	 * </code> 
+	 * </code>
+	 * </pre>
 	 * @param linkClass
 	 * @param rendererClass
 	 */
